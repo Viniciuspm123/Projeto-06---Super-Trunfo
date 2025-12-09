@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Trunfo Retrô</title>
+    <link rel="stylesheet" href="css/style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <h1>TRUNFO Retrô</h1>
+        
+        <div id="modal-resultado" class="modal-retro oculta">
+            <div class="modal-conteudo">
+                <p id="modal-mensagem"></p>
+                <button id="modal-btn-ok" onclick="fecharModalPadrao()">OK</button> 
+            </div>
+        </div>
+        <div id="placar" class="placar">
+            <span>Você: <span id="pontos-voce">0</span> cartas</span>
+            <span>Máquina: <span id="pontos-maquina">0</span> cartas</span>
+            <span id="mensagem">Aguardando sua jogada...</span>
+        </div>
+
+        <div class="game-board">
+            
+            <div class="deck-area">
+                <div id="deck-voce" class="card-back deck-monte"></div>
+                <p>Seu Monte (<span id="cartas-voce-count">0</span>)</p>
+            </div>
+
+            <div id="carta-voce" class="carta">
+                </div>
+
+            <div class="vs">VS</div>
+
+            <div id="carta-maquina" class="carta maquina-carta">
+                <div class="card-back-opponent"></div>
+                </div>
+
+            <div class="deck-area">
+                <div id="deck-maquina" class="card-back deck-monte deck-monte-maquina"></div>
+                <p>Monte da Máquina (<span id="cartas-maquina-count">0</span>)</p>
+            </div>
+            
+        </div>
+
+        <button id="btn-iniciar" onclick="iniciarJogo()">Iniciar Jogo</button>
+        <button id="btn-jogar" disabled onclick="jogar()">Jogar</button>
+        <button id="btn-proxima-rodada" disabled onclick="proximaRodada()">Próxima Rodada</button>
+
+    </div>
+
+    <script src="js/script.js"></script> 
+</body>
+</html>

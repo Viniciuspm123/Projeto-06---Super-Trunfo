@@ -1,0 +1,263 @@
+/* Importação da fonte pixelizada */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    --cor-fundo: #333333;
+    --cor-borda-retro: #00ff00; /* Verde neon para um toque retrô/monitor */
+    --cor-texto-retro: #ffffff;
+    --cor-destaque: #ff00ff; /* Magenta neon */
+    --tamanho-carta-largura: 220px;
+    --tamanho-carta-altura: 300px;
+    --cor-modal-fundo: #000000;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', cursive;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-retro);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+    padding: 20px;
+    border: 5px solid var(--cor-borda-retro);
+    box-shadow: 0 0 15px var(--cor-borda-retro);
+    background-color: #111; /* Mais escuro dentro da borda */
+    position: relative; /* Necessário para posicionar o modal em relação ao container */
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--cor-destaque);
+    text-shadow: 0 0 5px var(--cor-destaque);
+}
+
+.placar {
+    margin: 15px 0;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    border: 2px dashed var(--cor-borda-retro);
+}
+
+#mensagem {
+    font-size: 10px;
+    color: yellow;
+}
+
+/* --- ESTILOS DO MODAL RETRÔ --- */
+
+.modal-retro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: var(--cor-modal-fundo);
+    border: 4px solid var(--cor-destaque);
+    box-shadow: 0 0 10px var(--cor-destaque);
+    z-index: 10; /* Garante que fique acima de outros elementos */
+    text-align: center;
+}
+
+.modal-retro.oculta {
+    display: none;
+}
+
+.modal-conteudo {
+    color: #fff;
+}
+
+#modal-mensagem {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: yellow;
+    text-shadow: 0 0 5px yellow;
+}
+
+/* Animação de Desaparecimento "Dispersão Retrô" */
+@keyframes retro-disperse {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotateY(0deg) scale(1);
+        filter: drop-shadow(0 0 0px var(--cor-destaque));
+    }
+    100% {
+        opacity: 0;
+        /* Move para longe (dispersão 3D) e para fora (simulação de fragmentos) */
+        transform: translate(50vw, 50vh) rotateY(180deg) scale(0); 
+        filter: drop-shadow(0 0 20px var(--cor-destaque)); /* Efeito de brilho enquanto some */
+    }
+}
+
+.animando-saida {
+    animation: retro-disperse 0.8s ease-in forwards; /* Tempo de 0.8s */
+}
+
+/* FIM ESTILOS DO MODAL */
+
+
+/* Área de Cartas e Decks */
+.game-board {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.deck-area {
+    text-align: center;
+}
+
+.deck-monte {
+    width: var(--tamanho-carta-largura);
+    height: var(--tamanho-carta-altura);
+    margin-bottom: 10px;
+    border: 4px solid var(--cor-borda-retro);
+    background-color: #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    box-shadow: inset 0 0 10px #000;
+}
+
+.deck-monte::before {
+    content: "DECK";
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+    opacity: 0.5;
+}
+
+/* Estilo da Carta */
+.carta {
+    width: var(--tamanho-carta-largura);
+    height: var(--tamanho-carta-altura);
+    background-color: #f0f0f0;
+    color: #000;
+    border: 4px solid var(--cor-borda-retro);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-size: 10px;
+    position: relative;
+}
+
+/* Verso da Carta da Máquina (escondendo o conteúdo) */
+.maquina-carta {
+    background-color: var(--cor-fundo);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-back-opponent {
+    width: 100%;
+    height: 100%;
+    background-color: #770077; /* Roxo retrô */
+    border: 4px solid var(--cor-destaque);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-back-opponent::before {
+    content: "OPONENTE";
+    color: var(--cor-destaque);
+    text-shadow: 0 0 5px var(--cor-destaque);
+    font-size: 14px;
+    transform: rotate(-10deg);
+}
+
+/* --- ESTILO PARA IMAGENS DA WEB --- */
+.card-imagem {
+    width: 100%; /* Ocupa a largura total do container */
+    height: 80px; /* Altura fixa para simular um espaço de arte */
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 1px dashed #000;
+    /* Estilo para simular baixa resolução/pixel art */
+    image-rendering: pixelated; 
+}
+
+
+/* Conteúdo da Carta */
+.card-titulo {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #aaa;
+}
+
+.card-atributos div {
+    margin: 5px 0;
+    padding: 3px;
+    cursor: pointer;
+    transition: background-color 0.1s;
+    border-radius: 2px;
+}
+
+.card-atributos div:hover:not(.selecionado) {
+    background-color: #ccc;
+}
+
+.card-atributos .selecionado {
+    background-color: var(--cor-destaque);
+    color: var(--cor-texto-retro);
+    box-shadow: 0 0 5px var(--cor-destaque);
+}
+
+/* Efeito VS */
+.vs {
+    font-size: 30px;
+    color: var(--cor-destaque);
+    text-shadow: 0 0 10px var(--cor-destaque);
+}
+
+/* Botões */
+button {
+    background-color: var(--cor-borda-retro);
+    color: var(--cor-fundo);
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 0; /* Estilo retrô, sem bordas arredondadas */
+    box-shadow: 2px 2px 0px #008800; /* Sombra sólida */
+}
+
+button:hover:not(:disabled) {
+    background-color: #008800;
+    color: #fff;
+    box-shadow: 1px 1px 0px #004400;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
